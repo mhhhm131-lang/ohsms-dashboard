@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>نظام البلاغات</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-page="reports">
+  <header>
+    <h1>نظام إدارة السلامة والصحة المهنية – OHSMS M.S</h1>
+    <p>الواجهة الرئيسية للنظام – نظام البلاغات</p>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>القائمة الرئيسية</h3>
+      <a class="nav-link" href="index.html" data-page="home">الصفحة الرئيسية</a>
+      <a class="nav-link" href="dashboard.html" data-page="dashboard">لوحة التحكم</a>
+      <a class="nav-link" href="risks.html" data-page="risks">إدارة المخاطر</a>
+      <a class="nav-link" href="reports.html" data-page="reports">نظام البلاغات</a>
+      <a class="nav-link" href="documents.html" data-page="documents">الوثائق الرقمية</a>
+      <a class="nav-link" href="awareness.html" data-page="awareness">التوعية</a>
+      <a class="nav-link" href="clients.html" data-page="clients">العملاء والشركاء</a>
+      <a class="nav-link" href="admin.html" data-page="admin">إدارة النظام</a>
+    </aside>
+    <main class="content">
+
+      <section class="card">
+        <h2>📢 نظام البلاغات</h2>
+        <p>اختر نوع البلاغ. جميع البلاغات تُسجل في سجل التتبع.</p>
+<div class="card card-soft-danger clickable" id="openUrgent">
+            <h3>🚨 بلاغ عاجل</h3>
+            <p>تحويل فوري لاتصال أو واتساب.</p>
+          </div>
+          <div class="card card-soft-blue clickable" id="openNormal">
+            <h3>📨 بلاغ عادي</h3>
+            <p>يرتبط بالمستخدم المسجل.</p>
+          </div>
+        </div>
+
+        <div id="secretForm" class="form-block hidden">
+          <h3>🔒 نموذج بلاغ سري</h3>
+          <input id="s_type" placeholder="نوع الخطر" />
+          <input id="s_cause" placeholder="الأسباب" />
+          <input id="s_damage" placeholder="الأضرار" />
+          <input id="s_branch" placeholder="الفرع / الإدارة / القسم" />
+          <button id="btnSecret" class="btn-secondary">إرسال البلاغ</button>
+        </div>
+
+        <div id="normalForm" class="form-block">
+          <h3>📨 نموذج بلاغ عادي</h3>
+          <input id="n_type" placeholder="نوع الخطر" />
+          <input id="n_location" placeholder="موقع الخطر" />
+          <button id="btnNormal" class="btn-secondary">إرسال البلاغ</button>
+        </div>
+
+        <div id="urgentLinks" class="form-block hidden">
+          <h3>🚨 تحويل عاجل</h3>
+          <a href="tel:999" class="nav-link">اتصال فوري</a>
+          <a href="https://wa.me/966000000000" target="_blank" class="nav-link">
+            إرسال عبر واتساب
+          </a>
+        </div>
+
+        <h3 class="mt-20">📑 سجل تتبع البلاغات</h3>
+        <table id="reportTable" class="risk-table">
+          <thead>
+            <tr>
+              <th>رقم البلاغ</th>
+              <th>النوع</th>
+              <th>نوع الخطر / الموقع</th>
+              <th>التاريخ</th>
+              <th>الحالة</th>
+              <th>استلام موظف السلامة</th>
+            </tr>
+          </thead>
+          
+<div class="search-bar" style="margin:10px 0;">
+  <input id="searchInput" placeholder="🔍 بحث سريع برقم البلاغ أو النص..." 
+         style="padding:8px;width:60%;font-size:16px;">
+</div>
+
+<tbody></tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/reports.js"></script>
+</body>
+</html>

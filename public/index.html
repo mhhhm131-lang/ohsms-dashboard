@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>الصفحة الرئيسية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-page="home">
+  <header>
+    <h1>نظام إدارة السلامة والصحة المهنية – OHSMS M.S</h1>
+    <p>الواجهة الرئيسية للنظام – الصفحة الرئيسية</p>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>القائمة الرئيسية</h3>
+      <a class="nav-link" href="index.html" data-page="home">الصفحة الرئيسية</a>
+      <a class="nav-link" href="dashboard.html" data-page="dashboard">لوحة التحكم</a>
+      <a class="nav-link" href="risks.html" data-page="risks">إدارة المخاطر</a>
+      <a class="nav-link" href="reports.html" data-page="reports">نظام البلاغات <span id="newReportsCount" class="badge"></span></a>
+      <a class="nav-link" href="documents.html" data-page="documents">الوثائق الرقمية</a>
+      <a class="nav-link" href="awareness.html" data-page="awareness">التوعية</a>
+      <a class="nav-link" href="clients.html" data-page="clients">العملاء والشركاء</a>
+      <a class="nav-link" href="admin.html" data-page="admin">إدارة النظام</a>
+    </aside>
+    <main class="content">
+
+      <section class="card">
+        <h2>🏠 الصفحة الرئيسية</h2>
+        <p>هذا هو مركز النظام، ويمكنك التنقل بين الوحدات من القائمة الجانبية.</p>
+
+        <div class="home-grid">
+          <div class="card card-soft-blue">
+            <h3>📘 السياسة</h3>
+            <p>تلتزم المنشأة بتطبيق أعلى معايير السلامة والصحة المهنية.</p>
+          </div>
+          <div class="card card-soft-green">
+            <h3>🎯 الأهداف</h3>
+            <ul class="list">
+              <li>تقليل الحوادث المهنية.</li>
+              <li>رفع الوعي بالسلامة.</li>
+              <li>تحسين الالتزام.</li>
+            </ul>
+          </div>
+          <div class="card card-soft-yellow">
+            <h3>📍 النطاق</h3>
+            <p>يشمل النظام جميع الفروع والإدارات والأنشطة التشغيلية.</p>
+          </div>
+        </div>
+
+        
+        <div class="home-actions home-actions-large">
+          <button class="report-btn report-btn-secret" onclick="openSecretModal()">
+            🔒 بلاغ سري
+            <span>إرسال بلاغ سري بدون كشف الهوية</span>
+          </button>
+          <button class="report-btn report-btn-urgent" onclick="openUrgentModal()">
+            🚨 بلاغ عاجل
+            <span>اتصال أو واتساب بشكل فوري</span>
+          </button>
+          <button class="report-btn report-btn-normal" onclick="openNormalModal()">
+            📨 بلاغ عادي
+            <span>تسجيل بلاغ رسمي مع إمكانية التتبع لاحقًا</span>
+          </button>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+  
+
+  <!-- نماذج البلاغات (تظهر للمبلغ فقط على الصفحة الرئيسية) -->
+  <div id="secretModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <h3>🔒 نموذج بلاغ سري</h3>
+      <p class="modal-note">لن يتم تسجيل أي بيانات تعريفية عن صاحب البلاغ.</p>
+      <input id="home_s_type" placeholder="نوع الخطر" />
+      <input id="home_s_cause" placeholder="الأسباب" />
+      <input id="home_s_damage" placeholder="الأضرار المتوقعة أو المحتملة" />
+      <input id="home_s_branch" placeholder="الفرع / الإدارة / القسم / الموقع" />
+      <textarea id="home_s_reason" placeholder="لماذا اخترت أن يكون البلاغ سريًا؟"></textarea>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="submitSecretFromHome()">إرسال البلاغ</button>
+        <button class="btn-ghost" onclick="closeSecretModal()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="urgentModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <h3>🚨 بلاغ عاجل</h3>
+      <p class="modal-note">اختر طريقة التواصل الفورية. سيتم تسجيل بلاغ عاجل في النظام بالتوازي.</p>
+      <div class="urgent-actions">
+        <a class="btn-urgent" href="tel:0505498966" onclick="submitUrgentFromHome('call')">📞 اتصال مباشر</a>
+        <a class="btn-urgent-alt" href="https://wa.me/966505498966" target="_blank" onclick="submitUrgentFromHome('whatsapp')">💬 واتساب مباشر</a>
+      </div>
+      <button class="btn-ghost" onclick="closeUrgentModal()">إغلاق</button>
+    </div>
+  </div>
+
+  <div id="normalModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <h3>📨 نموذج بلاغ عادي</h3>
+      <p class="modal-note">سيتم لاحقًا ربط البلاغ بحساب المستخدم عند تفعيل نظام الدخول.</p>
+      <input id="home_n_type" placeholder="نوع الخطر" />
+      <input id="home_n_location" placeholder="موقع الخطر" />
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="submitNormalFromHome()">إرسال البلاغ</button>
+        <button class="btn-ghost" onclick="closeNormalModal()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="successToast" class="success-toast hidden">
+    ✔ تم إرسال بلاغك بنجاح.
+  </div>
+
+  <script>
+    // فتح وإغلاق المودالات على الصفحة الرئيسية
+    function openSecretModal() {
+      document.getElementById('secretModal').classList.remove('hidden');
+    }
+    function closeSecretModal() {
+      document.getElementById('secretModal').classList.add('hidden');
+    }
+    function openUrgentModal() {
+      document.getElementById('urgentModal').classList.remove('hidden');
+    }
+    function closeUrgentModal() {
+      document.getElementById('urgentModal').classList.add('hidden');
+    }
+    function openNormalModal() {
+      document.getElementById('normalModal').classList.remove('hidden');
+    }
+    function closeNormalModal() {
+      document.getElementById('normalModal').classList.add('hidden');
+    }
+
+    function showSuccessToast() {
+      var toast = document.getElementById('successToast');
+      toast.classList.remove('hidden');
+      setTimeout(function () {
+        toast.classList.add('hidden');
+      }, 2500);
+    }
+
+    function generateReportId(kind) {
+      var now = new Date();
+      var year = now.getFullYear();
+      var prefix = kind === 'secret' ? 'SE' : (kind === 'urgent' ? 'AC' : 'NO');
+      var key = 'counter_' + year + '_' + prefix;
+      var current = parseInt(localStorage.getItem(key) || '0', 10) + 1;
+      localStorage.setItem(key, String(current));
+      var counterStr = String(current).padStart(5, '0');
+      return year + '-' + prefix + '-' + counterStr;
+    }
+
+    function saveReportObject(report) {
+      var reports = JSON.parse(localStorage.getItem('reports') || '[]');
+      reports.push(report);
+      localStorage.setItem('reports', JSON.stringify(reports));
+    }
+
+    function submitSecretFromHome() {
+      var report = {
+        id: generateReportId('secret'),
+        type: 'سري',
+        danger: document.getElementById('home_s_type').value,
+        cause: document.getElementById('home_s_cause').value,
+        damage: document.getElementById('home_s_damage').value,
+        location: document.getElementById('home_s_branch').value,
+        reasonSecret: document.getElementById('home_s_reason').value,
+        createdAt: new Date().toLocaleString(),
+        status: 'جديد',
+        receivedBySafety: '-'
+      };
+      saveReportObject(report);
+      closeSecretModal();
+      showSuccessToast();
+    }
+
+    function submitUrgentFromHome(channel) {
+      var report = {
+        id: generateReportId('urgent'),
+        type: 'عاجل',
+        danger: 'بلاغ عاجل (' + channel + ')',
+        cause: '-',
+        damage: '-',
+        location: '-',
+        createdAt: new Date().toLocaleString(),
+        status: 'جديد',
+        receivedBySafety: '-'
+      };
+      saveReportObject(report);
+      // لا نغلق المودال هنا لأن الرابط سينتقل للمكالمة / الواتساب
+      showSuccessToast();
+    }
+
+    function submitNormalFromHome() {
+      var report = {
+        id: generateReportId('normal'),
+        type: 'عادي',
+        danger: document.getElementById('home_n_type').value,
+        cause: '-',
+        damage: '-',
+        location: document.getElementById('home_n_location').value,
+        createdAt: new Date().toLocaleString(),
+        status: 'جديد',
+        receivedBySafety: '-'
+      };
+      saveReportObject(report);
+      closeNormalModal();
+      showSuccessToast();
+    }
+  </script>
+
+  <script src="assets/js/common.js"></script>
+</body>
+</html>

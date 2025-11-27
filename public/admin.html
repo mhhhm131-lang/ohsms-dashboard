@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>إدارة النظام</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-page="admin">
+  <header>
+    <h1>نظام إدارة السلامة والصحة المهنية – OHSMS M.S</h1>
+    <p>الواجهة الرئيسية للنظام – إدارة النظام</p>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>القائمة الرئيسية</h3>
+      <a class="nav-link" href="index.html" data-page="home">الصفحة الرئيسية</a>
+      <a class="nav-link" href="dashboard.html" data-page="dashboard">لوحة التحكم</a>
+      <a class="nav-link" href="risks.html" data-page="risks">إدارة المخاطر</a>
+      <a class="nav-link" href="reports.html" data-page="reports">نظام البلاغات</a>
+      <a class="nav-link" href="documents.html" data-page="documents">الوثائق الرقمية</a>
+      <a class="nav-link" href="awareness.html" data-page="awareness">التوعية</a>
+      <a class="nav-link" href="clients.html" data-page="clients">العملاء والشركاء</a>
+      <a class="nav-link" href="admin.html" data-page="admin">إدارة النظام</a>
+    </aside>
+    <main class="content">
+
+      <section class="card">
+        <h2>⚙️ إدارة النظام</h2>
+        <p>هذه الصفحة لعرض صورة واضحة عن قدرات النظام.</p>
+
+        <h3>🎨 إعدادات الثيم</h3>
+        <div class="theme-buttons">
+          <button class="card theme-btn" data-theme="light">🌞 الوضع الفاتح</button>
+          <button class="card theme-btn" data-theme="dark">🌙 الوضع الداكن</button>
+          <button class="card theme-btn" data-theme="custom">🎨 تخصيص الألوان</button>
+        </div>
+
+        <h3>🛡️ إدارة الصلاحيات (تصور)</h3>
+        <div class="card">
+          <ul class="list">
+            <li>👑 الإدارة العليا – وصول كامل + تعليقات واعتماد.</li>
+            <li>📝 اللجان – مثل الإدارة العليا.</li>
+            <li>📍 مدراء الفروع/الإدارات/الأقسام – سجلات حسب النطاق.</li>
+            <li>🧑‍💼 المنسق – إدخال مخاطر وبلاغات.</li>
+            <li>👤 الموظف – الاطلاع على السجل العام والبلاغات.</li>
+            <li>⚙️ مدير النظام – تحكم كامل في الإعدادات.</li>
+          </ul>
+        </div>
+
+        <h3>🧩 التحكم في القوائم والنماذج</h3>
+        <div class="docs-grid">
+          <div class="card">إعادة ترتيب القوائم</div>
+          <div class="card">إضافة/حذف النماذج</div>
+          <div class="card">التحكم في حقول النماذج</div>
+          <div class="card">إدارة المحتوى التوعوي</div>
+        </div>
+
+        <h3>🛠️ إعدادات متقدمة</h3>
+        <div class="docs-grid">
+          <div class="card">إعدادات الربط مع قاعدة البيانات</div>
+          <div class="card">إدارة النسخ الاحتياطية</div>
+          <div class="card">إعدادات الأمان</div>
+          <div class="card">معلومات النظام والإصدار</div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script src="assets/js/common.js"></script>
+
+<div class="card" style="margin:20px; padding:20px; background:#fff; border-radius:10px;">
+  <h2>إعداد محتوى الصفحة الرئيسية</h2>
+  <label>سياسة السلامة المهنية:</label>
+  <textarea id="homePolicy" style="width:100%;height:100px;"></textarea>
+  <label>أهداف النظام:</label>
+  <textarea id="homeGoals" style="width:100%;height:100px;"></textarea>
+  <label>نطاق التطبيق:</label>
+  <textarea id="homeScope" style="width:100%;height:100px;"></textarea>
+  <button onclick="saveHomeContent()">حفظ</button>
+  <button onclick="resetHomeContent()">استرجاع الافتراضي</button>
+</div>
+
+
+  <div class="card" style="margin:20px; padding:20px; background:#fff; border-radius:10px;">
+    <h2>إدارة الهيكل التنظيمي (الفروع – الإدارات – الأقسام – المباني)</h2>
+    <p>يمكنك هنا التحكم في الإدارات والأقسام والمباني لكل فرع. منسق السلامة في الفرع يمكن أن يُمنح لاحقاً صلاحية إدارة الفرع الخاص به فقط.</p>
+
+    <label for="orgBranchSelect">اختر الفرع:</label>
+    <select id="orgBranchSelect"></select>
+
+    <div class="org-admin-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px;">
+      <div class="org-block">
+        <h3>الإدارات</h3>
+        <ul id="orgDepartmentsList" style="list-style:none;padding:0;max-height:200px;overflow:auto;"></ul>
+        <input id="newDepartmentName" type="text" placeholder="إسم الإدارة الجديدة" style="width:100%;margin-top:8px;"/>
+        <button onclick="addDepartment()" style="margin-top:6px;">➕ إضافة إدارة</button>
+      </div>
+
+      <div class="org-block">
+        <h3>الأقسام (للإدارة المحددة)</h3>
+        <label for="orgDepartmentSelect">الإدارة:</label>
+        <select id="orgDepartmentSelect" onchange="onAdminDepartmentChange()" style="width:100%;margin-bottom:6px;"></select>
+        <ul id="orgSectionsList" style="list-style:none;padding:0;max-height:200px;overflow:auto;"></ul>
+        <input id="newSectionName" type="text" placeholder="إسم القسم الجديد" style="width:100%;margin-top:8px;"/>
+        <button onclick="addSection()" style="margin-top:6px;">➕ إضافة قسم</button>
+      </div>
+
+      <div class="org-block">
+        <h3>المباني</h3>
+        <ul id="orgBuildingsList" style="list-style:none;padding:0;max-height:200px;overflow:auto;"></ul>
+        <input id="newBuildingName" type="text" placeholder="إسم المبنى الجديد" style="width:100%;margin-top:8px;"/>
+        <button onclick="addBuilding()" style="margin-top:6px;">➕ إضافة مبنى</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

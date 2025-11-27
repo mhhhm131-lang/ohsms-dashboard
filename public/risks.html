@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>إدارة المخاطر</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-page="risks">
+  <header>
+    <h1>نظام إدارة السلامة والصحة المهنية – OHSMS M.S</h1>
+    <p>الواجهة الرئيسية للنظام – إدارة المخاطر</p>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>القائمة الرئيسية</h3>
+      <a class="nav-link" href="index.html" data-page="home">الصفحة الرئيسية</a>
+      <a class="nav-link" href="dashboard.html" data-page="dashboard">لوحة التحكم</a>
+      <a class="nav-link" href="risks.html" data-page="risks">إدارة المخاطر</a>
+      <a class="nav-link" href="reports.html" data-page="reports">نظام البلاغات</a>
+      <a class="nav-link" href="documents.html" data-page="documents">الوثائق الرقمية</a>
+      <a class="nav-link" href="awareness.html" data-page="awareness">التوعية</a>
+      <a class="nav-link" href="clients.html" data-page="clients">العملاء والشركاء</a>
+      <a class="nav-link" href="admin.html" data-page="admin">إدارة النظام</a>
+    </aside>
+    <main class="content">
+
+      <section class="card">
+        <h2>⚠️ إدارة المخاطر</h2>
+        <div class="risk-tabs">
+          <button class="tab-btn" data-tab="riskEntry">إدخال المخاطر</button>
+          <button class="tab-btn active" data-tab="riskGeneral">السجل العام</button>
+          <button class="tab-btn" data-tab="riskPrivate">السجل الخاص</button>
+        </div>
+
+        <div id="riskEntry" class="tab-content hidden">
+          <h3>📝 نموذج إدخال الخطر</h3>
+          <form id="riskForm" class="grid-form" onsubmit="return false;">
+            <select id="branch" onchange="onBranchChange()">
+              <option value="">اختر الفرع</option>
+              <option value="المركز الرئيسي">المركز الرئيسي</option>
+              <option value="فرع الرياض">فرع الرياض</option>
+              <option value="فرع الشرقية">فرع الشرقية</option>
+              <option value="فرع الجنوب">فرع الجنوب</option>
+              <option value="فرع الغربية">فرع الغربية</option>
+            </select>
+
+            <select id="department" onchange="onDepartmentChange()">
+              <option value="">اختر الإدارة</option>
+            </select>
+
+            <select id="sectionField">
+              <option value="">اختر القسم</option>
+            </select>
+
+            <select id="building">
+              <option value="">اختر المبنى</option>
+            </select>
+
+            <input placeholder="الطابق" id="floor" />
+
+            <select id="mainRisk" onchange="updateSubCategories()">
+              <option value="">اختر الفئة الرئيسية للخطر</option>
+              <option value="سلامة عامة">سلامة عامة</option>
+              <option value="بيئة">بيئة</option>
+              <option value="تشغيل">تشغيل</option>
+            </select>
+
+            <select id="subRisk" onchange="updateCauses()">
+              <option value="">اختر الفئة الفرعية</option>
+            </select>
+
+            <select id="riskCause">
+              <option value="">اختر مسببات الخطر</option>
+            </select>
+
+            <input placeholder="المتأثرون" id="affected" />
+
+            <select id="probability">
+              <option value="1">الاحتمالية 1</option>
+              <option value="2">الاحتمالية 2</option>
+              <option value="3">الاحتمالية 3</option>
+              <option value="4">الاحتمالية 4</option>
+              <option value="5">الاحتمالية 5</option>
+            </select>
+
+            <select id="severity">
+              <option value="1">الشدة 1</option>
+              <option value="2">الشدة 2</option>
+              <option value="3">الشدة 3</option>
+              <option value="4">الشدة 4</option>
+              <option value="5">الشدة 5</option>
+            </select>
+
+            <input id="evaluation" placeholder="التقييم (تلقائي)" disabled />
+
+            <input placeholder="الإجراء التصحيحي" id="corrective" />
+            <input placeholder="الإجراء الوقائي" id="preventive" />
+            <input placeholder="الإدارة المسؤولة" id="responsibleDept" />
+            <input placeholder="الشخص المفوض" id="authorizedPerson" />
+            <input placeholder="قناة التواصل" id="contact" />
+          </form>
+
+          <button id="saveRiskBtn" class="btn-primary">
+            💾 حفظ الخطر
+          </button>
+        </div>
+
+        <div id="riskGeneral" class="tab-content">
+          <h3>📘 السجل العام للمخاطر</h3>
+          <table id="generalTable" class="risk-table">
+            <thead>
+              <tr>
+                <th>الفئة الرئيسية</th>
+                <th>الفئة الفرعية</th>
+                <th>مسببات الخطر</th>
+                <th>الشدة</th>
+                <th>الاحتمالية</th>
+                <th>التقييم</th>
+                <th>المتأثرين</th>
+                <th>الإجراء التصحيحي</th>
+                <th>الإجراء الوقائي</th>
+                <th>الإدارة المسؤولة</th>
+                <th>الشخص المسؤول</th>
+                <th>قناة التواصل</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div id="riskPrivate" class="tab-content hidden">
+          <h3>📙 السجل الخاص بالمخاطر</h3>
+          
+<div id="riskFilterBar" class="filter-bar" style="display:flex;gap:10px; margin:10px 0;">
+ <select id="fBranch" onchange="filterPrivateRisks()"><option value="">كل الفروع</option></select>
+ <select id="fDept" onchange="filterPrivateRisks()"><option value="">كل الإدارات</option></select>
+ <select id="fSection" onchange="filterPrivateRisks()"><option value="">كل الأقسام</option></select>
+ <select id="fBuilding" onchange="filterPrivateRisks()"><option value="">كل المباني</option></select>
+ <button onclick="resetRiskFilters()">إعادة التعيين</button>
+</div>
+<table id="privateTable" class="risk-table">
+            <thead>
+              <tr>
+                <th>الفرع</th>
+                <th>الإدارة</th>
+                <th>القسم</th>
+                <th>اسم المبنى</th>
+                <th>الطابق</th>
+                <th>الفئة الرئيسية</th>
+                <th>الفئة الفرعية</th>
+                <th>مسببات الخطر</th>
+                <th>الشدة</th>
+                <th>الاحتمالية</th>
+                <th>التقييم</th>
+                <th>المتأثرين</th>
+                <th>الإجراء التصحيحي</th>
+                <th>الإجراء الوقائي</th>
+                <th>الإدارة المسؤولة</th>
+                <th>الشخص المسؤول</th>
+                <th>قناة التواصل</th>
+                <th>حالة الخطر</th>
+                <th>ملاحظات</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/risks.js"></script>
+
+  <!-- نافذة منبثقة لعرض النصوص الطويلة -->
+  <div id="textModal" class="modal" onclick="this.style.display='none'">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close" onclick="document.getElementById('textModal').style.display='none'">&times;</span>
+      <p id="modalText"></p>
+    </div>
+  </div>
+
+</body>
+</html>

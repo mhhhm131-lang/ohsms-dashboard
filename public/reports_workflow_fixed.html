@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head><meta charset="UTF-8"><title>سجل المتابعة</title>
+<link rel="stylesheet" href="assets/css/styles.css"></head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<h3>القائمة الرئيسية</h3>
+<a class="nav-link" href="index.html">الصفحة الرئيسية</a>
+<a class="nav-link" href="dashboard.html">لوحة التحكم</a>
+<a class="nav-link" href="risks.html">إدارة المخاطر</a>
+
+<div class="nav-link">نظام البلاغات ▼</div>
+<ul class="sub-menu">
+ <li><strong>➕ بلاغ جديد</strong></li>
+ <ul>
+   <li><a href="reports.html?mode=secret">🔒 سري</a></li>
+   <li><a href="reports.html?mode=urgent">🚨 عاجل</a></li>
+   <li><a href="reports.html?mode=normal">📨 عادي</a></li>
+ </ul>
+ <li><a href="reports.html">📑 سجل المتابعة</a></li>
+</ul>
+
+<a class="nav-link" href="documents.html">الوثائق الرقمية</a>
+<a class="nav-link" href="awareness.html">التوعية</a>
+<a class="nav-link" href="clients.html">العملاء والشركاء</a>
+<a class="nav-link" href="admin.html">إدارة النظام</a>
+</aside>
+<main>
+<section class="card">
+<h2>إدخال بلاغ جديد</h2>
+<p style="font-size:13px;color:#6b7280;">
+        يمكن إدخال بلاغ عادي أو سري من هنا. البلاغ السري لا يُظهر اسم المبلغ، بينما البلاغ العادي يستخدم اسم المستخدم أعلاه.
+        البلاغ العاجل يُنشأ من الصفحة الرئيسية.
+      </p>
+<div class="actions-row">
+<button class="btn btn-primary" onclick="openNewReportModal('عادي')">➕ بلاغ عادي</button>
+<button class="btn btn-danger" onclick="createUrgentReport()">🚨 بلاغ عاجل</button>
+<button class="btn btn-secondary" onclick="openNewReportModal('سري')">🔒 بلاغ سري من داخل النظام</button>
+</div>
+</section>
+<section class="card">
+<h2>سجل البلاغات</h2>
+<div class="filters-row">
+<div>
+<label style="font-size:12px;">تصفية حسب الحالة:</label>
+<select id="statusFilter" onchange="renderTable()">
+<option value="">الكل</option>
+<option value="جديد">جديد</option>
+<option value="جاري العمل">جاري العمل</option>
+<option value="محال للإدارة">محال للإدارة</option>
+<option value="قيد المعالجة">قيد المعالجة</option>
+<option value="مغلق">مغلق</option>
+<option value="مصعّد لمدير القسم">مصعّد لمدير القسم</option>
+<option value="مصعّد لمدير الإدارة">مصعّد لمدير الإدارة</option>
+<option value="مصعّد لمدير الفرع">مصعّد لمدير الفرع</option>
+<option value="مصعّد للجنة السلامة">مصعّد للجنة السلامة</option>
+<option value="مصعّد للإدارة العليا">مصعّد للإدارة العليا</option>
+<option value="محال للجهة الخارجية">محال للجهة الخارجية</option>
+</select>
+</div>
+<div>
+<label style="font-size:12px;">تصفية حسب نوع البلاغ:</label>
+<select id="typeFilter" onchange="renderTable()">
+<option value="">الكل</option>
+<option value="سري">سري</option>
+<option value="عادي">عادي</option>
+<option value="عاجل">عاجل</option>
+</select>
+</div>
+<div>
+<label style="font-size:12px;">بحث برقم البلاغ أو الموقع:</label>
+<input id="searchText" oninput="renderTable()" placeholder="ابحث..." type="text"/>
+</div>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>رقم البلاغ</th>
+<th>النوع</th>
+<th>الموقع</th>
+<th>الفئة</th>
+<th>الحالة الحالية</th>
+<th>آخر تحديث</th>
+<th>الإدارة المسؤولة</th>
+<th>إجراءات</th>
+</tr>
+</thead>
+<tbody id="reportsBody"><tr>
+<td>BLG-2025-0005</td>
+<td><span class="type-pill t-secret">سري 🔒</span></td>
+<td>بللبي </td>
+<td>مخاطر صحية - ضوضاء عالية </td>
+<td><span class="status-pill st-new">جديد</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:٥٦:٣٢ م</td>
+<td>- </td>
+<td><button class="btn btn-secondary" onclick="openManage(0)">إدارة</button></td>
+</tr><tr>
+<td>BLG-2025-0004</td>
+<td><span class="type-pill t-secret">سري 🔒</span></td>
+<td>بيرلب </td>
+<td>مخاطر كهربائية - سلك مكشوف </td>
+<td><span class="status-pill st-progress">جاري العمل</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:٥٦:١٤ م</td>
+<td>- </td>
+<td><button class="btn btn-secondary" onclick="openManage(1)">إدارة</button></td>
+</tr><tr>
+<td>BLG-2025-0001</td>
+<td><span class="type-pill t-normal">عادي</span></td>
+<td>مبنى A - الدور الأرضي </td>
+<td>تماس كهربائي </td>
+<td><span class="status-pill st-escalated">مصعّد لمدير الفرع</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:١٤:٠٨ م</td>
+<td>إدارة الأمن </td>
+<td><button class="btn btn-secondary" onclick="openManage(2)">إدارة</button></td>
+</tr><tr>
+<td>BLG-2025-0002</td>
+<td><span class="type-pill t-secret">سري 🔒</span></td>
+<td>مبنى B - الدور الثالث </td>
+<td>تسرب مياه </td>
+<td><span class="status-pill st-progress">محال للإدارة</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:١١:١١ م</td>
+<td>إدارة الصيانة </td>
+<td><button class="btn btn-secondary" onclick="openManage(3)">إدارة</button></td>
+</tr><tr>
+<td>BLG-2025-0003</td>
+<td><span class="type-pill t-urgent">عاجل 🚨</span></td>
+<td>موقف السيارات </td>
+<td>حريق بسيط </td>
+<td><span class="status-pill st-escalated">مصعّد لمدير القسم</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:١١:١١ م</td>
+<td>إدارة الأمن </td>
+<td><button class="btn btn-secondary" onclick="openManage(4)">إدارة</button></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة التحكم</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-page="dashboard">
+  <header>
+    <h1>نظام إدارة السلامة والصحة المهنية – OHSMS M.S</h1>
+    <p>الواجهة الرئيسية للنظام – لوحة التحكم</p>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>القائمة الرئيسية</h3>
+      <a class="nav-link" href="index.html" data-page="home">الصفحة الرئيسية</a>
+      <a class="nav-link" href="dashboard.html" data-page="dashboard">لوحة التحكم</a>
+      <a class="nav-link" href="risks.html" data-page="risks">إدارة المخاطر</a>
+      <a class="nav-link" href="reports.html" data-page="reports">نظام البلاغات</a>
+      <a class="nav-link" href="documents.html" data-page="documents">الوثائق الرقمية</a>
+      <a class="nav-link" href="awareness.html" data-page="awareness">التوعية</a>
+      <a class="nav-link" href="clients.html" data-page="clients">العملاء والشركاء</a>
+      <a class="nav-link" href="admin.html" data-page="admin">إدارة النظام</a>
+    </aside>
+    <main class="content">
+
+      <section class="card">
+        <h2>📊 لوحة التحكم – Dashboard</h2>
+        <p>مؤشرات الأداء العامة مع إمكانية التصفية حسب الفرع والإدارة والقسم والمبنى.</p>
+        <div class="filter-bar" style="display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;">
+          <select id="dashBranchFilter">
+            <option value="">كل الفروع</option>
+          </select>
+          <select id="dashDeptFilter">
+            <option value="">كل الإدارات</option>
+          </select>
+          <select id="dashSectionFilter">
+            <option value="">كل الأقسام</option>
+          </select>
+          <select id="dashBuildingFilter">
+            <option value="">كل المباني</option>
+          </select>
+          <button type="button" onclick="resetDashboardFilters()">إعادة التعيين</button>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <span class="kpi-label">إجمالي المخاطر</span>
+            <span id="totalRisks" class="kpi-value">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">المخاطر العالية</span>
+            <span id="highRisks" class="kpi-value">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">إجمالي البلاغات</span>
+            <span id="totalReports" class="kpi-value">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">الوثائق الرقمية</span>
+            <span id="totalDocs" class="kpi-value">0</span>
+          </div>
+        </div>
+        <div class="charts-grid">
+          <div class="card chart-large">
+            <h3>📈 البلاغات خلال الأشهر</h3>
+            <canvas id="reportsByMonthChart"></canvas>
+          </div>
+          <div class="chart-row">
+            <div class="card chart-card">
+              <h3>📊 أنواع البلاغات</h3>
+              <canvas id="reportTypesChart"></canvas>
+            </div>
+            <div class="card chart-card">
+              <h3>⚠️ مستويات المخاطر</h3>
+              <canvas id="riskLevelsChart"></canvas>
+            </div>
+            <div class="card chart-card">
+              <h3>📡 حالة معالجة البلاغات</h3>
+              <canvas id="reportStatusChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

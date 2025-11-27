@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0084)file:///C:/Users/IPA/Downloads/ohsms_final_modular/reports.html?mode=secret -->
+<html dir="rtl" lang="ar"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>وحدة بلاغات السلامة – السجل والتتبّع</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+    body {
+      margin: 0;
+      font-family: "Cairo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f7fa;
+      color: #111827;
+    }
+    header {
+      background: linear-gradient(135deg, #004a99, #0164c9);
+      color: #fff;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 14px rgba(15,23,42,.3);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    header small {
+      opacity: .9;
+      font-size: 12px;
+    }
+    .user-box {
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:4px;
+      font-size:12px;
+    }
+    .user-box input {
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid #bfdbfe;
+      font-size:12px;
+    }
+    main {
+      padding: 18px;
+      max-width: 1200px;
+      margin: 0 auto 32px;
+    }
+    .card {
+      background:#fff;
+      border-radius:18px;
+      padding:16px 18px;
+      box-shadow:0 8px 22px rgba(15,23,42,.06);
+      border:1px solid #e5e7eb;
+      margin-bottom:18px;
+    }
+    h2 {
+      margin-top:0;
+      font-size:18px;
+    }
+    .actions-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .btn {
+      border:none;
+      border-radius:999px;
+      padding:7px 14px;
+      font-family:inherit;
+      font-size:13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:.18s;
+    }
+    .btn-primary {
+      background:linear-gradient(135deg,#2563eb,#1d4ed8);
+      color:#fff;
+      box-shadow:0 4px 12px rgba(37,99,235,.45);
+    }
+    .btn-secondary {
+      background:#e5e7eb;
+      color:#111827;
+    }
+    .btn-danger {
+      background:#fee2e2;
+      color:#b91c1c;
+    }
+    .btn:hover {
+      transform:translateY(-1px);
+      filter:brightness(1.03);
+    }
+    .filters-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+      align-items:center;
+    }
+    select, input[type="text"], textarea {
+      padding:6px 9px;
+      border-radius:10px;
+      border:1px solid #d1d5db;
+      font-family:inherit;
+      font-size:13px;
+    }
+    textarea {
+      width:100%;
+      resize:vertical;
+    }
+    .table-wrap {
+      margin-top:12px;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid #e5e7eb;
+      background:#fff;
+    }
+    table {
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+    }
+    th, td {
+      padding:6px 8px;
+      border-bottom:1px solid #e5e7eb;
+      text-align:center;
+    }
+    th {
+      background:linear-gradient(135deg,#e5e7eb,#f3f4f6);
+      font-weight:600;
+      color:#374151;
+    }
+    tr:nth-child(even) td {
+      background:#f9fafb;
+    }
+    tr:hover td {
+      background:#e0f2fe;
+    }
+    .status-pill {
+      padding:3px 8px;
+      border-radius:999px;
+      font-size:11px;
+      display:inline-block;
+    }
+    .st-new { background:#dbeafe; color:#1d4ed8; }
+    .st-progress { background:#fef3c7; color:#92400e; }
+    .st-done { background:#dcfce7; color:#166534; }
+    .st-escalated { background:#fee2e2; color:#b91c1c; }
+    .type-pill {
+      padding:2px 6px;
+      border-radius:999px;
+      font-size:11px;
+      display:inline-block;
+    }
+    .t-secret { background:#fef3c7; color:#92400e; }
+    .t-normal { background:#e0f2fe; color:#1d4ed8; }
+    .t-urgent { background:#fee2e2; color:#b91c1c; }
+    .modal-backdrop {
+      position:fixed;
+      inset:0;
+      background:rgba(15,23,42,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:40;
+    }
+    .modal-backdrop.active {
+      display:flex;
+    }
+    .modal {
+      background:#fff;
+      border-radius:20px;
+      max-width:900px;
+      width:100%;
+      margin:0 10px;
+      box-shadow:0 20px 45px rgba(15,23,42,.35);
+      max-height:90vh;
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-header {
+      padding:12px 18px;
+      border-bottom:1px solid #e5e7eb;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .modal-header h3 {
+      margin:0;
+      font-size:16px;
+    }
+    .badge {
+      padding:3px 8px;
+      border-radius:999px;
+      font-size:11px;
+      background:#eff6ff;
+      color:#1d4ed8;
+    }
+    .modal-body {
+      padding:14px 18px;
+      overflow-y:auto;
+    }
+    .modal-footer {
+      padding:10px 18px 12px;
+      border-top:1px solid #e5e7eb;
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .detail-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .detail-item {
+      font-size:13px;
+      background:#f9fafb;
+      border-radius:12px;
+      padding:8px 10px;
+      border:1px solid #e5e7eb;
+    }
+    .detail-item span {
+      display:block;
+      font-size:11px;
+      color:#6b7280;
+      margin-bottom:3px;
+    }
+    .timeline {
+      margin-top:10px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      padding:10px;
+      background:#f9fafb;
+      max-height:200px;
+      overflow-y:auto;
+      font-size:12px;
+    }
+    .timeline h4 {
+      margin:0 0 6px;
+      font-size:13px;
+    }
+    .timeline-item {
+      margin-bottom:6px;
+      padding-bottom:6px;
+      border-bottom:1px dashed #e5e7eb;
+    }
+    .timeline-item:last-child {
+      border-bottom:none;
+      margin-bottom:0;
+    }
+    .timeline-item .t-action {
+      font-weight:600;
+      color:#111827;
+    }
+    .timeline-item .t-meta {
+      color:#6b7280;
+    }
+    .toast {
+      position:fixed;
+      bottom:16px;
+      left:16px;
+      background:#111827;
+      color:#f9fafb;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      display:none;
+      align-items:center;
+      gap:8px;
+      z-index:50;
+      box-shadow:0 10px 25px rgba(15,23,42,.45);
+    }
+    .toast.show {
+      display:flex;
+    }
+    @media (max-width: 768px){
+      header {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+      }
+      .user-box {
+        align-items:flex-start;
+      }
+      .modal {
+        max-height:95vh;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="notifyBar" style="position:fixed;top:10px;left:10px;z-index:9999;">
+<button id="notifBtn" style="font-size:20px;position:relative;">
+    🔔 <span id="notifCount" style="background:red;color:white;border-radius:50%;padding:2px 6px;font-size:12px;position:absolute;top:-10px;right:-10px;">0</span>
+</button>
+<div id="notifList" style="display:none;background:white;border:1px solid #ccc;padding:10px;width:250px;">
+</div>
+</div>
+<header>
+<div>
+<h1>سجل بلاغات السلامة</h1>
+<small>إدارة البلاغات (سري – عادي – عاجل) مع تتبع وتصعيد</small>
+</div>
+<div class="user-box">
+<label>اسم المستخدم الحالي (يظهر في سجل التتبع للبلاغات العادية فقط):</label>
+<input id="currentUser" placeholder="مثال: أحمد – إدارة السلامة" type="text"/>
+</div>
+</header>
+<main>
+<section class="card">
+<h2>إدخال بلاغ جديد</h2>
+<p style="font-size:13px;color:#6b7280;">
+        يمكن إدخال بلاغ عادي أو سري من هنا. البلاغ السري لا يُظهر اسم المبلغ، بينما البلاغ العادي يستخدم اسم المستخدم أعلاه.
+        البلاغ العاجل يُنشأ من الصفحة الرئيسية.
+      </p>
+<div class="actions-row">
+<button class="btn btn-primary" onclick="openNewReportModal('عادي')">➕ بلاغ عادي</button>
+<button class="btn btn-danger" onclick="createUrgentReport()">🚨 بلاغ عاجل</button>
+<button class="btn btn-secondary" onclick="openNewReportModal('سري')">🔒 بلاغ سري من داخل النظام</button>
+</div>
+</section>
+<section class="card">
+<h2>سجل البلاغات</h2>
+<div class="filters-row">
+<div>
+<label style="font-size:12px;">تصفية حسب الحالة:</label>
+<select id="statusFilter" onchange="renderTable()">
+<option value="">الكل</option>
+<option value="جديد">جديد</option>
+<option value="جاري العمل">جاري العمل</option>
+<option value="محال للإدارة">محال للإدارة</option>
+<option value="قيد المعالجة">قيد المعالجة</option>
+<option value="مغلق">مغلق</option>
+<option value="مصعّد لمدير القسم">مصعّد لمدير القسم</option>
+<option value="مصعّد لمدير الإدارة">مصعّد لمدير الإدارة</option>
+<option value="مصعّد لمدير الفرع">مصعّد لمدير الفرع</option>
+<option value="مصعّد للجنة السلامة">مصعّد للجنة السلامة</option>
+<option value="مصعّد للإدارة العليا">مصعّد للإدارة العليا</option>
+<option value="محال للجهة الخارجية">محال للجهة الخارجية</option>
+</select>
+</div>
+<div>
+<label style="font-size:12px;">تصفية حسب نوع البلاغ:</label>
+<select id="typeFilter" onchange="renderTable()">
+<option value="">الكل</option>
+<option value="سري">سري</option>
+<option value="عادي">عادي</option>
+<option value="عاجل">عاجل</option>
+</select>
+</div>
+<div>
+<label style="font-size:12px;">بحث برقم البلاغ أو الموقع:</label>
+<input id="searchText" oninput="renderTable()" placeholder="ابحث..." type="text"/>
+</div>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>رقم البلاغ</th>
+<th>النوع</th>
+<th>الموقع</th>
+<th>الفئة</th>
+<th>الحالة الحالية</th>
+<th>آخر تحديث</th>
+<th>الإدارة المسؤولة</th>
+<th>إجراءات</th>
+</tr>
+</thead>
+<tbody id="reportsBody"><tr>
+<td>BLG-2025-0005</td>
+<td><span class="type-pill t-secret">سري 🔒</span></td>
+<td>بللبي </td>
+<td>مخاطر صحية - ضوضاء عالية </td>
+<td><span class="status-pill st-new">جديد</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:٥٦:٣٢ م</td>
+<td>- </td>
+<td><button class="btn btn-secondary" onclick="openManage(0)">إدارة</button></td>
+</tr><tr>
+<td>BLG-2025-0004</td>
+<td><span class="type-pill t-secret">سري 🔒</span></td>
+<td>بيرلب </td>
+<td>مخاطر كهربائية - سلك مكشوف </td>
+<td><span class="status-pill st-progress">جاري العمل</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:٥٦:١٤ م</td>
+<td>- </td>
+<td><button class="btn btn-secondary" onclick="openManage(1)">إدارة</button></td>
+</tr><tr>
+<td>BLG-2025-0001</td>
+<td><span class="type-pill t-normal">عادي</span></td>
+<td>مبنى A - الدور الأرضي </td>
+<td>تماس كهربائي </td>
+<td><span class="status-pill st-escalated">مصعّد لمدير الفرع</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:١٤:٠٨ م</td>
+<td>إدارة الأمن </td>
+<td><button class="btn btn-secondary" onclick="openManage(2)">إدارة</button></td>
+</tr><tr>
+<td>BLG-2025-0002</td>
+<td><span class="type-pill t-secret">سري 🔒</span></td>
+<td>مبنى B - الدور الثالث </td>
+<td>تسرب مياه </td>
+<td><span class="status-pill st-progress">محال للإدارة</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:١١:١١ م</td>
+<td>إدارة الصيانة </td>
+<td><button class="btn btn-secondary" onclick="openManage(3)">إدارة</button></td>
+</tr><tr>
+<td>BLG-2025-0003</td>
+<td><span class="type-pill t-urgent">عاجل 🚨</span></td>
+<td>موقف السيارات </td>
+<td>حريق بسيط </td>
+<td><span class="status-pill st-escalated">مصعّد لمدير القسم</span></td>
+<td style="font-size:11px;">١‏/٦‏/١٤٤٧ هـ ١٠:١١:١١ م</td>
+<td>إدارة الأمن </td>
+<td><button class="btn btn-secondary" onclick="openManage(4)">إدارة</button></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- نافذة بلاغ جديد -->
+<div class="modal-backdrop" id="newReportBackdrop">
+<div class="modal">
+<div class="modal-header">
+<h3 id="newReportTitle">إنشاء بلاغ سري</h3>
+<button class="btn btn-secondary" onclick="closeNewReportModal()">✕ إغلاق</button>
+</div>
+<div class="modal-body">
+<div class="detail-grid">
+<div class="detail-item">
+<span>رقم البلاغ (يقترحه النظام):</span>
+<div id="newReportId" style="font-weight:700;">BLG-2025-0006</div>
+</div>
+<div class="detail-item">
+<span>نوع البلاغ:</span>
+<div id="newReportTypeLabel" style="font-weight:700;">سري</div>
+</div>
+<div class="detail-item">
+<span>وقت وتاريخ الإنشاء:</span>
+<div id="newReportCreatedAt" style="font-size:12px;">١‏/٦‏/١٤٤٧ هـ ١١:٠٦:٥٤ م</div>
+</div>
+</div>
+<div class="detail-grid">
+<div class="detail-item">
+<span>فئة الخطر الرئيسية:</span>
+<select id="nrMainHazard"><option value="">اختر فئة رئيسية...</option><option value="مخاطر كهربائية">مخاطر كهربائية</option><option value="مخاطر حرائق">مخاطر حرائق</option><option value="مخاطر صحية">مخاطر صحية</option><option value="مخاطر بيئية">مخاطر بيئية</option><option value="مخاطر سلوكية">مخاطر سلوكية</option></select>
+</div>
+<div class="detail-item">
+<span>فئة الخطر الفرعية:</span>
+<select id="nrSubHazard"><option value="">اختر فئة فرعية...</option></select>
+</div>
+<div class="detail-item">
+<span>الفرع:</span>
+<select id="nrBranch" onchange="nrOnBranchChange()">
+  <option value="">اختر الفرع...</option>
+  <option value="المركز الرئيسي">المركز الرئيسي</option>
+  <option value="فرع الرياض">فرع الرياض</option>
+  <option value="فرع الشرقية">فرع الشرقية</option>
+  <option value="فرع الجنوب">فرع الجنوب</option>
+  <option value="فرع الغربية">فرع الغربية</option>
+</select>
+</div>
+<div class="detail-item">
+<span>الإدارة:</span>
+<select id="nrDepartment" onchange="nrOnDepartmentChange()">
+  <option value="">اختر الإدارة...</option>
+</select>
+</div>
+<div class="detail-item">
+<span>القسم:</span>
+<select id="nrSection">
+  <option value="">اختر القسم...</option>
+</select>
+</div>
+<div class="detail-item">
+<span>المبنى:</span>
+<select id="nrBuilding">
+  <option value="">اختر المبنى...</option>
+</select>
+</div>
+<div class="detail-item">
+<span>وصف الموقع (اختياري):</span>
+<input id="nrLocation" placeholder="مثال: قرب المخرج الجنوبي أو وصف إضافي" type="text"/>
+</div>
+</div>
+<div class="detail-grid">
+<div class="detail-item" style="grid-column:1 / -1;">
+<span>وصف تفصيلي للحالة:</span>
+<textarea id="nrDescription" placeholder="اكتب وصفاً تفصيلياً للحالة، يمكن أن يكون نصاً طويلاً." rows="4"></textarea>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-secondary" onclick="closeNewReportModal()">إلغاء</button>
+<button class="btn btn-primary" onclick="saveNewReport()">💾 حفظ البلاغ</button>
+</div>
+</div>
+</div>
+<!-- نافذة إدارة بلاغ -->
+<div class="modal-backdrop" id="manageBackdrop">
+<div class="modal">
+<div class="modal-header">
+<h3>
+          إدارة البلاغ <span class="badge" id="m_id">BLG-2025-0005</span>
+</h3>
+<div>
+<span class="badge" id="m_type">سري</span>
+           
+          <span class="status-pill st-new" id="m_status">جديد</span>
+</div>
+</div>
+<div class="modal-body">
+<div class="detail-grid">
+<div class="detail-item">
+<span>نوع الخطر</span>
+<div id="m_danger">مخاطر صحية - ضوضاء عالية</div>
+</div>
+<div class="detail-item">
+<span>الموقع</span>
+<div id="m_location">بللبي</div>
+</div>
+<div class="detail-item">
+<span>وصف تفصيلي</span>
+<div id="m_description" style="white-space:pre-wrap;">تتتلا نتالا ع              خهغعلا عغ9علاغععغب لغف عغل 7غفل عال لا8غ لاهاغ لار8غغ8لا  8 عغلالا ر8 8غرطلا لاغ 8عغلالا ر ط9ع  9 علاع لاهعى 0 ه0هى  لاع لاع ر9هعى  ع9اا عغفف ر77ف ف 7فر كع 8غ8غعبلغعفبغف67ثقا  78غف مغغ89غ 7غف98 غف غل7فغب 76ي65قث87 8عغ098دهعانعت ل87ف9غ تحختنحعت 89غلفهامتنخحتنح9عت ه عل7ف987ف ر87ف غا8 خت عهالفلغبلغعبلغبيغفي ع7ف87 لارهعل7عف رلهعغلغبعغف ر عغبلعغلب غ غ88غ اهات لا9ع 9ع90ع تعخ9هحتعتخح9ع 9 8ععغ8غا8عهغ عغعهلف77ببلار عغف87غف7 فغ 87غ89غ 8غا8عغ لا89عغ8غهعلاهعغبل 7غلف غ غاخ طط8خغ عغغاخ8اغهخغا 8هع خ</div>
+</div>
+<div class="detail-item">
+<span>تاريخ الإنشاء</span>
+<div id="m_created">١‏/٦‏/١٤٤٧ هـ ١٠:٥٦:٣٢ م</div>
+</div>
+</div>
+<div class="detail-grid">
+<div class="detail-item">
+<span>الإدارة المسؤولة الحالية</span>
+<div id="m_department">-</div>
+</div>
+<div class="detail-item">
+<span>تحديد إدارة مسؤولة</span>
+<select id="m_departmentSelect"><option value="">اختر إدارة...</option><option>إدارة السلامة</option><option>إدارة الصيانة</option><option>إدارة الأمن</option><option>إدارة التشغيل</option><option>إدارة الطوارئ</option><option>إدارة الموارد البشرية</option><option>إدارة الخدمات العامة</option></select>
+</div>
+<div class="detail-item">
+<span>اسم المستلم / المنفّذ</span>
+<select id="m_actor"></select>
+</div>
+</div>
+<div class="timeline">
+<h4>سجل التتبع الزمني</h4>
+<div id="m_timeline"><div class="timeline-item">
+<div class="t-action">إنشاء البلاغ</div>
+<div class="t-meta">١‏/٦‏/١٤٤٧ هـ ١٠:٥٦:٣٢ م – بواسطة: مُبلّغ سري (مجهول)</div>
+</div></div>
+</div>
+</div>
+<div class="modal-footer">
+<div class="actions-row" style="margin-top:0;">
+<button class="btn btn-primary" onclick="actionReceive()">✔ استلام البلاغ</button>
+<button class="btn btn-secondary" onclick="actionAssignDept()">📌 تعيين إدارة مسؤولة</button>
+<button class="btn btn_SECONDARY" onclick="actionForward()">📤 إحالة للإدارة</button>
+<button class="btn btn-secondary" onclick="actionStartWork()">🔁 بدء / متابعة المعالجة</button>
+<button class="btn btn-primary" onclick="actionClose()">✅ إغلاق البلاغ</button>
+</div>
+<div class="actions-row" style="margin-top:8px;">
+<button class="btn btn-danger" onclick="actionEscalate('مدير القسم')">⬆ تصعيد لمدير القسم</button>
+<button class="btn btn-danger" onclick="actionEscalate('مدير الإدارة')">⬆ تصعيد لمدير الإدارة</button>
+<button class="btn btn-danger" onclick="actionEscalate('مدير الفرع')">⬆ تصعيد لمدير الفرع</button>
+<button class="btn btn-danger" onclick="actionEscalate('لجنة السلامة')">⬆ تصعيد للجنة السلامة</button>
+<button class="btn btn-danger" onclick="actionEscalate('الإدارة العليا')">⬆ تصعيد للإدارة العليا</button>
+<button class="btn btn-danger" onclick="actionEscalate('جهة خارجية')">⬆ إحالة / تصعيد لجهة خارجية</button>
+</div>
+<button class="btn btn-secondary" onclick="closeManageModal()">✕ إغلاق النافذة</button>
+</div>
+</div>
+</div>
+<div class="toast" id="toast">
+<span id="toastMsg">تم إنشاء البلاغ رقم BLG-2025-0005</span>
+</div>
+<script>
+const deptActors = {
+ "إدارة السلامة": ["موظف السلامة أحمد","موظف السلامة عبدالله"],
+ "إدارة الأمن": ["مشرف الأمن فهد","ضابط الأمن ماجد"],
+ "إدارة الصيانة": ["فني الصيانة خالد","فني الكهرباء يوسف"],
+ "إدارة التشغيل": ["مشرف التشغيل علي","مراقب التشغيل سامي"],
+ "إدارة الطوارئ": ["منسق الطوارئ منصور","قائد فريق الطوارئ حسن"],
+ "إدارة الموارد البشرية": ["أخصائي الموارد البشرية ناصر","مسؤول شؤون الموظفين محمد"],
+ "إدارة الخدمات العامة": ["مشرف الخدمات بندر","فني الخدمات تركي"]
+};
+
+function populateActorsByDept(selectedDept){
+  const sel = document.getElementById('m_actor');
+  if(!sel) return;
+  const list = deptActors[selectedDept] || [];
+  sel.innerHTML = '<option value="">اختر مستلم/منفّذ...</option>' +
+    list.map(a=>`<option value="${a}">${a}</option>`).join('');
+}
+
+    const LS_KEY = "ohsms_reports_workflow_v1";
+
+    const defaultDepartments = [
+      'إدارة السلامة',
+      'إدارة الصيانة',
+      'إدارة الأمن',
+      'إدارة التشغيل',
+      'إدارة الطوارئ',
+      'إدارة الموارد البشرية',
+      'إدارة الخدمات العامة'
+    ];
+
+    const hazards = {
+      "مخاطر كهربائية": ["لوحة توزيع", "سلك مكشوف", "تماس كهربائي", "محول / قاطع"],
+      "مخاطر حرائق": ["تسرب غاز", "مواد قابلة للاشتعال", "شرارة / دخان", "طفاية غير صالحة"],
+      "مخاطر صحية": ["مواد كيميائية", "روائح مستمرة", "تلوث", "ضوضاء عالية"],
+      "مخاطر بيئية": ["مياه راكدة", "تسرب مياه", "تهوية ضعيفة", "حرارة / برودة عالية"],
+      "مخاطر سلوكية": ["تصرف غير آمن", "عدم استخدام معدات الوقاية", "عدم اتباع الإجراءات", "سرعة زائدة"]
+    };
+
+    // هيكل الفروع والإدارات والأقسام والمباني (افتراضي)
+    const ORG_STRUCTURE = {
+      "المركز الرئيسي": {
+        departments: {
+          "الإدارة العامة": ["قسم الأمن", "قسم الجودة"],
+          "إدارة تقنية المعلومات": ["قسم الشبكات", "قسم التطوير", "قسم الدعم الفني"],
+          "إدارة الصحة والسلامة المهنية": ["قسم السلامة", "قسم البيئة"],
+          "إدارة التدريب": ["قسم البرامج التدريبية", "قسم شؤون المتدربين"],
+          "إدارة الموارد البشرية": ["قسم شؤون الموظفين", "قسم التدريب والتطوير"]
+        },
+        buildings: ["مبنى الإدارة", "مبنى التدريب الرئيسي", "مبنى الدعم الفني"]
+      },
+      "فرع الرياض": {
+        departments: {
+          "إدارة التدريب": ["قسم البرامج", "قسم شؤون المتدربين"],
+          "إدارة التشغيل": ["قسم العمليات", "قسم الخدمات"],
+          "إدارة العلاقات العامة": ["قسم التواصل", "قسم الشراكات"]
+        },
+        buildings: ["مبنى A", "مبنى B"]
+      },
+      "فرع الشرقية": {
+        departments: {
+          "إدارة التشغيل": ["قسم العمليات"],
+          "إدارة التدريب": ["قسم البرامج"]
+        },
+        buildings: ["مبنى 1", "مبنى 2"]
+      },
+      "فرع الجنوب": {
+        departments: {
+          "إدارة التشغيل": ["قسم العمليات"],
+          "إدارة الخدمات": ["قسم الصيانة"]
+        },
+        buildings: ["مبنى الجنوب الرئيسي"]
+      },
+      "فرع الغربية": {
+        departments: {
+          "إدارة التدريب": ["قسم البرامج"],
+          "إدارة التشغيل": ["قسم العلاقات"]
+        },
+        buildings: ["مبنى جدة الإداري"]
+      }
+    };
+
+    function getOrgStructureForReports() {
+      try {
+        const raw = localStorage.getItem("ohsms_structure");
+        if (!raw) return ORG_STRUCTURE;
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object") return parsed;
+        return ORG_STRUCTURE;
+      } catch (e) {
+        console.warn("تعذر تحميل هيكل الفروع للتقارير، سيتم استخدام الافتراضي.", e);
+        return ORG_STRUCTURE;
+      }
+    }
+
+    function nrOnBranchChange() {
+      const struct = getOrgStructureForReports();
+      const branchSel = document.getElementById("nrBranch");
+      const depSel = document.getElementById("nrDepartment");
+      const secSel = document.getElementById("nrSection");
+      const bSel = document.getElementById("nrBuilding");
+      if (!branchSel || !depSel || !secSel || !bSel) return;
+      const branch = branchSel.value;
+      depSel.innerHTML = '<option value="">اختر الإدارة...</option>';
+      secSel.innerHTML = '<option value="">اختر القسم...</option>';
+      bSel.innerHTML = '<option value="">اختر المبنى...</option>';
+      if (!branch || !struct[branch]) return;
+      const deps = struct[branch].departments || {};
+      Object.keys(deps).forEach((d) => {
+        const opt = document.createElement("option");
+        opt.value = d;
+        opt.textContent = d;
+        depSel.appendChild(opt);
+      });
+      (struct[branch].buildings || []).forEach((b) => {
+        const opt = document.createElement("option");
+        opt.value = b;
+        opt.textContent = b;
+        bSel.appendChild(opt);
+      });
+    }
+
+    function nrOnDepartmentChange() {
+      const struct = getOrgStructureForReports();
+      const branchSel = document.getElementById("nrBranch");
+      const depSel = document.getElementById("nrDepartment");
+      const secSel = document.getElementById("nrSection");
+      if (!branchSel || !depSel || !secSel) return;
+      const branch = branchSel.value;
+      const dep = depSel.value;
+      secSel.innerHTML = '<option value="">اختر القسم...</option>';
+      if (!branch || !dep || !struct[branch]) return;
+      const deps = struct[branch].departments || {};
+      const secs = deps[dep] || [];
+      secs.forEach((s) => {
+        const opt = document.createElement("option");
+        opt.value = s;
+        opt.textContent = s;
+        secSel.appendChild(opt);
+      });
+    }
+
+
+
+    function nowStr(){
+      return new Date().toLocaleString('ar-SA');
+    }
+
+    function loadState(){
+      try {
+        const raw = localStorage.getItem(LS_KEY);
+        if(!raw) return { lastCounter: 0, year: new Date().getFullYear(), reports: [] };
+        return JSON.parse(raw);
+      } catch(e) {
+        console.error(e);
+        return { lastCounter: 0, year: new Date().getFullYear(), reports: [] };
+      }
+    }
+
+    function saveState(state){
+      localStorage.setItem(LS_KEY, JSON.stringify(state));
+    }
+
+    let appState = loadState();
+    let manageIndex = null;
+    let newReportTypeGlobal = 'عادي';
+
+    function generateId(){
+      const year = new Date().getFullYear();
+      if(appState.year !== year){
+        appState.year = year;
+        appState.lastCounter = 0;
+      }
+      appState.lastCounter += 1;
+      const seq = String(appState.lastCounter).padStart(4,'0');
+      return `BLG-${year}-${seq}`;
+    }
+
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      const tm = document.getElementById('toastMsg');
+      tm.textContent = msg;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'), 3000);
+    }
+
+    function getCurrentUser(){
+      return document.getElementById('currentUser').value || '';
+    }
+
+    function populateHazardSelects(){
+      const mainSel = document.getElementById('nrMainHazard');
+      const subSel = document.getElementById('nrSubHazard');
+      mainSel.innerHTML = '';
+      subSel.innerHTML = '';
+      mainSel.innerHTML = '<option value="">اختر فئة رئيسية...</option>' +
+        Object.keys(hazards).map(h => `<option value="${h}">${h}</option>`).join('');
+      subSel.innerHTML = '<option value="">اختر فئة فرعية...</option>';
+      mainSel.onchange = function(){
+        const v = mainSel.value;
+        const list = hazards[v] || [];
+        subSel.innerHTML = '<option value="">اختر فئة فرعية...</option>' +
+          list.map(s => `<option value="${s}">${s}</option>`).join('');
+      };
+    }
+
+    function openNewReportModal(type){
+      newReportTypeGlobal = type;
+      const id = generateId();
+      const created = nowStr();
+      document.getElementById('newReportId').textContent = id;
+      document.getElementById('newReportTypeLabel').textContent = type;
+      document.getElementById('newReportCreatedAt').textContent = created;
+      document.getElementById('newReportTitle').textContent = 'إنشاء بلاغ ' + type;
+      document.getElementById('nrLocation').value = '';
+      document.getElementById('nrDescription').value = '';
+      populateHazardSelects();
+      document.getElementById('newReportBackdrop').classList.add('active');
+    }
+
+    function closeNewReportModal(){
+      document.getElementById('newReportBackdrop').classList.remove('active');
+    }
+
+    function saveNewReport(){
+      const id = document.getElementById('newReportId').textContent;
+      const type = newReportTypeGlobal;
+      const createdAt = document.getElementById('newReportCreatedAt').textContent;
+      const mainHaz = document.getElementById('nrMainHazard').value;
+      const subHaz = document.getElementById('nrSubHazard').value;
+      const branch = document.getElementById('nrBranch').value;
+      const orgDept = document.getElementById('nrDepartment').value;
+      const section = document.getElementById('nrSection').value;
+      const building = document.getElementById('nrBuilding').value;
+      const locationExtra = document.getElementById('nrLocation').value.trim();
+      const description = document.getElementById('nrDescription').value.trim();
+
+      if(!mainHaz || !subHaz || !branch || !orgDept || !section || !building || !description){
+        alert('الرجاء اختيار الفئة الرئيسية والفرعية والفرع والإدارة والقسم والمبنى، وإدخال الوصف التفصيلي.');
+        return;
+      }
+
+      const danger = mainHaz + " - " + subHaz;
+      let actor;
+      if(type === 'سري'){
+        actor = 'مُبلّغ سري (مجهول)';
+      } else {
+        actor = getCurrentUser() || 'مستخدم النظام';
+      }
+
+      let location = branch + ' - ' + building;
+      if (section) location += ' - ' + section;
+      if (locationExtra) location += ' - ' + locationExtra;
+
+      const report = {
+        id,
+        type,
+        danger,
+        location,
+        description,
+        branch,
+        orgDepartment: orgDept,
+        section,
+        building,
+        createdAt,
+        status: 'جديد',
+        department: '',
+        lastUpdate: createdAt,
+        history: [
+          {
+            action: 'إنشاء البلاغ',
+            by: actor,
+            time: createdAt,
+            note: ''
+          }
+        ]
+      };
+      appState.reports.unshift(report);
+      saveState(appState);
+      closeNewReportModal();
+      renderTable();
+      showToast('تم إنشاء البلاغ رقم ' + id);
+    }
+
+    function statusClass(status){
+      if(status === 'جديد') return 'status-pill st-new';
+      if(status === 'مغلق') return 'status-pill st-done';
+      if(status && (status.startsWith('مصعّد') || status.startsWith('محال للجهة الخارجية'))) return 'status-pill st-escalated';
+      return 'status-pill st-progress';
+    }
+
+    function typeBadge(type){
+      if(type === 'سري') return '<span class="type-pill t-secret">سري 🔒</span>';
+      if(type === 'عاجل') return '<span class="type-pill t-urgent">عاجل 🚨</span>';
+      return '<span class="type-pill t-normal">عادي</span>';
+    }
+
+    function addHistory(report, action, note){
+      report.history = report.history || [];
+      const entry = {
+        action,
+        by: getCurrentUser() || 'مستخدم النظام',
+        time: nowStr(),
+        note: note || ''
+      };
+      report.history.push(entry);
+      report.lastUpdate = entry.time;
+    }
+
+    function renderTable(){
+      const body = document.getElementById('reportsBody');
+      body.innerHTML = '';
+      const statusFilter = document.getElementById('statusFilter').value;
+      const typeFilter = document.getElementById('typeFilter').value;
+      const search = document.getElementById('searchText').value.trim().toLowerCase();
+
+      appState = loadState();
+      appState.reports.forEach((r, idx) => {
+        if(statusFilter && r.status !== statusFilter) return;
+        if(typeFilter && r.type !== typeFilter) return;
+        if(search){
+          const s = search;
+          if(!(r.id || '').toLowerCase().includes(s) && !(r.location || '').toLowerCase().includes(s)){
+            return;
+          }
+        }
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${r.id}</td>
+          <td>${typeBadge(r.type)}</td>
+          <td>${r.location || '-'} </td>
+          <td>${r.danger || '-'} </td>
+          <td><span class="${statusClass(r.status)}">${r.status}</span></td>
+          <td style="font-size:11px;">${r.lastUpdate || '-'}</td>
+          <td>${r.department || '-'} </td>
+          <td><button class="btn btn-secondary" onclick="openManage(${idx})">إدارة</button></td>
+        `;
+        body.appendChild(tr);
+      });
+      saveState(appState);
+    }
+
+    function openManage(index){
+      manageIndex = index;
+      appState = loadState();
+      const r = appState.reports[index];
+      document.getElementById('m_id').textContent = r.id;
+      document.getElementById('m_type').textContent = r.type;
+      const stSpan = document.getElementById('m_status');
+      stSpan.textContent = r.status;
+      stSpan.className = statusClass(r.status);
+      document.getElementById('m_danger').textContent = r.danger || '-';
+      document.getElementById('m_location').textContent = r.location || '-';
+      document.getElementById('m_description').textContent = r.description || '-';
+      document.getElementById('m_created').textContent = r.createdAt || '-';
+      document.getElementById('m_department').textContent = r.department || '-';
+
+      const sel = document.getElementById('m_departmentSelect');
+      sel.innerHTML = '<option value="">اختر إدارة...</option>' +
+        defaultDepartments.map(d => `<option ${d===r.department?'selected':''}>${d}</option>`).join('');
+      populateActorsByDept(r.department);
+
+      const tl = document.getElementById('m_timeline');
+      tl.innerHTML = '';
+      (r.history || []).forEach(h => {
+        const div = document.createElement('div');
+        div.className = 'timeline-item';
+        div.innerHTML = `
+          <div class="t-action">${h.action}</div>
+          <div class="t-meta">${h.time} – بواسطة: ${h.by}</div>
+          ${h.note ? `<div>${h.note}</div>` : ''}
+        `;
+        tl.appendChild(div);
+      });
+      document.getElementById('manageBackdrop').classList.add('active');
+    }
+
+    function closeManageModal(){
+      document.getElementById('manageBackdrop').classList.remove('active');
+      manageIndex = null;
+    }
+
+    function saveAndRefresh(msg){
+      saveState(appState);
+      renderTable();
+      if(manageIndex !== null) openManage(manageIndex);
+      if(msg) showToast(msg);
+    }
+
+    function actionReceive(){
+      if(manageIndex === null) return;
+      const r = appState.reports[manageIndex];
+      addHistory(r, 'استلام البلاغ', '');
+      if(r.status === 'جديد') r.status = 'جاري العمل';
+      saveAndRefresh('تم استلام البلاغ');
+    }
+
+    function actionAssignDept(){
+      if(manageIndex === null) return;
+      const r = appState.reports[manageIndex];
+      const sel = document.getElementById('m_departmentSelect');
+      const val = sel.value;
+      if(!val){
+        alert('الرجاء اختيار إدارة مسؤولة من القائمة.');
+        return;
+      }
+      r.department = val;
+      addHistory(r, 'تعيين إدارة مسؤولة', 'تم تعيين الإدارة: ' + val);
+      if(r.status === 'جديد') r.status = 'جاري العمل';
+      saveAndRefresh('تم تعيين الإدارة المسؤولة');
+    }
+
+    function actionForward(){
+      if(manageIndex === null) return;
+      const r = appState.reports[manageIndex];
+      if(!r.department){
+        alert('الرجاء اختيار إدارة مسؤولة أولاً.');
+        return;
+      }
+      addHistory(r, 'إحالة للإدارة', 'تمت الإحالة إلى ' + r.department);
+      r.status = 'محال للإدارة';
+      saveAndRefresh('تمت إحالة البلاغ إلى الإدارة');
+    }
+
+    function actionStartWork(){
+      if(manageIndex === null) return;
+      const r = appState.reports[manageIndex];
+      addHistory(r, 'بدء / متابعة المعالجة', '');
+      r.status = 'قيد المعالجة';
+      saveAndRefresh('تم تسجيل بدء / متابعة المعالجة');
+    }
+
+    function actionClose(){
+      if(manageIndex === null) return;
+      const r = appState.reports[manageIndex];
+      addHistory(r, 'إغلاق البلاغ', '');
+      r.status = 'مغلق';
+      saveAndRefresh('تم إغلاق البلاغ');
+    }
+
+    function actionEscalate(level){
+      if(manageIndex === null) return;
+      const r = appState.reports[manageIndex];
+      let st = '';
+      if(level === 'مدير القسم') st = 'مصعّد لمدير القسم';
+      else if(level === 'مدير الإدارة') st = 'مصعّد لمدير الإدارة';
+      else if(level === 'مدير الفرع') st = 'مصعّد لمدير الفرع';
+      else if(level === 'لجنة السلامة') st = 'مصعّد للجنة السلامة';
+      else if(level === 'الإدارة العليا') st = 'مصعّد للإدارة العليا';
+      else if(level === 'جهة خارجية') st = 'محال للجهة الخارجية';
+      addHistory(r, 'تصعيد إلى ' + level, '');
+      r.status = st;
+      saveAndRefresh('تم تصعيد البلاغ إلى ' + level);
+    }
+
+    function applyModeFromURL(){
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get('mode');
+      if(mode === 'secret'){
+        openNewReportModal('سري');
+      } else if(mode === 'normal'){
+        openNewReportModal('عادي');
+      }
+    }
+
+    // عند تحميل الصفحة
+    renderTable();
+    applyModeFromURL();
+  
+function generateId(type){
+ let state=loadState();
+ if(!state.normalCounter) state.normalCounter=0;
+ if(!state.secretCounter) state.secretCounter=0;
+ if(!state.urgentCounter) state.urgentCounter=0;
+ if(type==="عاجل"){ state.urgentCounter++; saveState(state); return "URG-"+String(state.urgentCounter).padStart(4,'0'); }
+ if(type==="سري"){ state.secretCounter++; saveState(state); return "SEC-"+String(state.secretCounter).padStart(4,'0'); }
+ state.normalCounter++; saveState(state); return "NRM-"+String(state.normalCounter).padStart(4,'0');
+}
+
+function createUrgentReport(){
+ let state=loadState();
+ const id=generateId("عاجل");
+ const now=new Date().toLocaleString();
+ const report={ id:id, type:"عاجل", danger:"", location:"", description:"", createdAt:now,
+  status:"جديد", department:"", lastUpdate:now,
+  history:[{action:"إنشاء بلاغ عاجل", by:"system", time:now}] };
+ state.reports.unshift(report); saveState(state); openManage(0);
+}
+
+</script>
+<script>
+let notif=[];
+
+function pushNotification(msg,id){
+  notif.push({msg:msg,id:id,read:false});
+  updateNotifUI();
+}
+
+function updateNotifUI(){
+  const c=document.getElementById('notifCount');
+  c.textContent=notif.filter(n=>!n.read).length;
+  const list=document.getElementById('notifList');
+  list.innerHTML='';
+  notif.forEach((n,i)=>{
+     let d=document.createElement('div');
+     d.style.padding='5px';
+     d.style.cursor='pointer';
+     d.textContent=n.msg;
+     d.onclick=function(){
+        n.read=true;
+        updateNotifUI();
+        openManage( notif.findIndex(x=>x.id===n.id) );
+     };
+     list.appendChild(d);
+  });
+}
+
+document.getElementById('notifBtn').onclick=function(){
+  const list=document.getElementById('notifList');
+  list.style.display = list.style.display==='none'?'block':'none';
+};
+
+// hook createUrgentReport to send notification
+if(typeof createUrgentReport_original==='undefined'){
+  const orig=createUrgentReport;
+  createUrgentReport=function(){
+    orig();
+    let id=loadState().reports[0].id;
+    pushNotification("بلاغ عاجل جديد رقم "+id,id);
+  }
+}
+</script><script>
+// Attachments support
+function fileToBase64(file){
+ return new Promise((res,rej)=>{
+   const r=new FileReader();
+   r.onload=()=>res({name:file.name, data:r.result, type:file.type});
+   r.onerror=rej;
+   r.readAsDataURL(file);
+ });
+}
+
+async function collectNewAttachments(){
+ const files=document.getElementById('nrAttachments').files;
+ let out=[];
+ for(let f of files){
+   let b=await fileToBase64(f);
+   out.push(b);
+ }
+ return out;
+}
+
+async function addManageAttachment(){
+ const inp=document.getElementById('m_addAttachment');
+ const files=inp.files;
+ let state=loadState();
+ let idx=window.currentManageIndex;
+ let rep=state.reports[idx];
+ if(!rep.attachments) rep.attachments=[];
+ for(let f of files){
+   let b=await fileToBase64(f);
+   rep.attachments.push(b);
+ }
+ saveState(state);
+ renderManageAttachments(rep.attachments);
+ alert("تمت إضافة المرفقات");
+}
+
+function renderManageAttachments(atts){
+ const box=document.getElementById('m_attachments');
+ box.innerHTML="";
+ if(!atts) return;
+ atts.forEach(a=>{
+   if(a.type.startsWith("image")){
+     box.innerHTML+=`<img src="${a.data}" style="max-width:150px;display:block;margin:5px;">`;
+   } else if(a.type.startsWith("audio")){
+     box.innerHTML+=`<audio controls src="${a.data}"></audio>`;
+   } else if(a.type.startsWith("video")){
+     box.innerHTML+=`<video controls style="max-width:200px"><source src="${a.data}"></video>`;
+   } else {
+     box.innerHTML+=`<a href="${a.data}" download="${a.name}">${a.name}</a>`;
+   }
+ });
+}
+
+// hook into saving new report
+if(typeof openNewReportModal_original==='undefined'){
+  const origSave=saveNewReport;
+  saveNewReport=async function(){
+    let atts=await collectNewAttachments();
+    let report = await origSave(atts);
+  }
+}
+</script></body></html>
